@@ -5,8 +5,7 @@ const galleryBox = document.querySelector("div.gallery");
 
 console.log(galleryItems);
 
-
-galleryItems.forEach((el) => {
+for (const el of galleryItems) {
   const galleryItem = document.createElement("div");
   galleryItem.classList.add("gallery__item");
 
@@ -17,29 +16,21 @@ galleryItems.forEach((el) => {
   const galleryImage = document.createElement("img");
   galleryImage.classList.add("gallery__image");
   galleryImage.src = el.preview;
-  galleryImage.dataSource = el.original;
+  galleryImage.dataset.source = el.original;
   galleryImage.alt = el.description;
 
   galleryBox.append(galleryItem);
   galleryItem.append(galleryLink);
   galleryLink.append(galleryImage);
-});
-
-galleryBox.addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log(event.target.src);
-  console.log(event.target);
-});
-
-
+};
 
 galleryBox.onclick = (event) => {
-
+event.preventDefault();
 
   basicLightbox
     .create(
       `
-		<img width="1280" src = ${event.target.src}>
+		<img width="1280" src = ${event.target.dataset.source}>
 	`
     )
     .show();
